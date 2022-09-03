@@ -31,5 +31,24 @@ services:
         restart: always
         links:
           - "postgres"
+    frontend:
+        build: ./library_front
+        container_name: frontend
+        image: frontend
+        entrypoint: /bin/sh -c
+        command:
+          - npm install && npm start
+        ports:
+          - "3000:3000"
+        expose:
+          - "3000"
+        depends_on:
+          - "postgres"
+          - "backend"
+        restart: always
+        links:
+          - "postgres"
+          - "backend"
+
 
 
