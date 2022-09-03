@@ -1,0 +1,35 @@
+version: '3.7'
+services:
+    postgres:
+        image: postgres:latest
+        container_name: postgres
+        restart: always
+        environment:
+          - POSTGRES_USER=postgres
+          - POSTGRES_PASSWORD=postgres
+          - POSTGRES_DB=library_db
+          - POSTGRES_PORT=5432
+        logging:
+          options:
+            max-size: 10m
+            max-file: "3"
+        ports:
+          - '5432:5432'
+    backend:
+        build: ./library_back
+        container_name: backend
+        image: backend
+        entrypoint: /bin/sh -c
+        command:
+          - python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver
+        ports:
+          - "8000:8000"
+        expose:
+          - "8000"
+        depends_on:
+          - "postgres"
+        restart: always
+        links:
+          - "postgres"
+
+
