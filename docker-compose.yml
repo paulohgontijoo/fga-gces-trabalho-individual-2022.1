@@ -1,5 +1,13 @@
 version: '3.7'
 services:
+    nginx:
+        image: nginx:latest
+        container_name: nginx
+        ports:
+          - "80:80"
+        volumes:
+          - ./library_front:/usr/share/nginx/html
+          - ./library_front/nginx/default.conf:/etc/nginx/default.conf
     postgres:
         image: postgres:latest
         container_name: postgres

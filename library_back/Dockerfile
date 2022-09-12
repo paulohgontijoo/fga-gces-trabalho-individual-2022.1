@@ -8,10 +8,6 @@ RUN apt install libpq-dev -y
 # Set working dir to /backend
 WORKDIR /backend
 
-# Prevents Python from writing pyc files and buffering stdout and stder
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
 # Copying requirements
 COPY requirements.txt requirements.txt
 
