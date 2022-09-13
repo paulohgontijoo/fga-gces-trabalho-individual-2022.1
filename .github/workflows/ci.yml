@@ -29,11 +29,11 @@ jobs:
 
     # Pushing builded images to repository
     - name: Push Front Docker Image
-        run: |
-          docker push paulohgontijoo/trabalho-individual-gces-unb-2022.1:front
-        working-directory: ./library_front
+      run: |
+        docker push paulohgontijoo/trabalho-individual-gces-unb-2022.1:front
+      working-directory: ./library_front
 
     - name: Push Back Docker Image
-        run: |
-          docker push paulohgontijoo/trabalho-individual-gces-unb-2022.1:back
-        working-directory: ./library_back
+      run: |
+        docker push paulohgontijoo/trabalho-individual-gces-unb-2022.1:back
+      working-directory: ./library_back
