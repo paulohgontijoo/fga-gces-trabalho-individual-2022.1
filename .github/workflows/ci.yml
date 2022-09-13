@@ -1,0 +1,39 @@
+# Name
+name: CI
+
+# Trigger to init actions
+on:
+  push:
+    branches: [ "main" ]
+
+# Jobs will be executed after trigger
+jobs:
+  # Build application
+  build:
+    # Which environment
+    runs-on: ubuntu-latest
+    # Steps to execute
+    steps:
+    - uses: actions/checkout@v3
+
+    # Building Front and Back Images
+    - name: Build Front Docker Image
+      run: |
+        docker build -t paulohgontijoo/trabalho-individual-gces-unb-2022.1:front .
+      working-directory: ./library_front
+
+    - name: Build Front Docker Image
+      run: |
+        docker build -t paulohgontijoo/trabalho-individual-gces-unb-2022.1:back .
+      working-directory: ./library_back
+
+    # Pushing builded images to repository
+    - name: Push Front Docker Image
+        run: |
+          docker push paulohgontijoo/trabalho-individual-gces-unb-2022.1:front
+        working-directory: ./library_front
+
+    - name: Push Back Docker Image
+        run: |
+          docker push paulohgontijoo/trabalho-individual-gces-unb-2022.1:back
+        working-directory: ./library_back
